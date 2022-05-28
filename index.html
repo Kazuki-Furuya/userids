@@ -12,7 +12,8 @@
                     <div class="mb-3">
                       <input class="form-control" id="exampleInputEmail1" placeholder="ユーザID" v-model.trim="message">
                       <div class="form-text">検索したいユーザIDを入力してください</div>
-                      <button type="button" class="btn btn-primary" v-on:click="getURL">Submit</button>
+                      <input type="text" name="dummy" style="display:none;">
+                      <button type="button" class="btn btn-primary" v-on:click="getURL">検索</button>
                     </div>
                 </form>
             </div>
@@ -47,9 +48,16 @@
                 },
                 methods: {
                     getURL: function(){
-                        this.instagramUserURL = "https://www.instagram.com/" + this.message
-                        this.twitterSearchURL = "https://twitter.com/search?f=user&q=" + this.message
-                        this.facebookSearchURL = "https://www.facebook.com/search/pages/?q=" + this.message
+                        this.instagramUserURL = ""
+                        this.twitterSearchURL = ""
+                        this.facebookSearchURL = ""
+
+                        if (this.message.length > 0) {
+                            this.instagramUserURL = "https://www.instagram.com/" + this.message
+                            this.twitterSearchURL = "https://twitter.com/search?f=user&q=" + this.message
+                            this.facebookSearchURL = "https://www.facebook.com/search/pages/?q=" + this.message
+                        }
+                        
                     },
                 }
             }
