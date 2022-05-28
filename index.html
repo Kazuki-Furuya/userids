@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <title>SNS ユーザIDサーチ</title>
+    </head>
+    <body>
+        <div id="app">
+            <div class="container p-2">
+                <form>
+                    <div class="mb-3">
+                      <input class="form-control" id="exampleInputEmail1" placeholder="ユーザID" v-model.trim="message">
+                      <div class="form-text">検索したいユーザIDを入力してください</div>
+                      <button type="button" class="btn btn-primary" v-on:click="getURL">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="container"  v-if="twitterSearchURL.length > 0">
+                <div class="container">
+                    <div class="row">
+                        Instagram
+                        <a  target="_blank" rel="noopener noreferrer" v-bind:href="instagramUserURL">{{ instagramUserURL }}</a>
+                    </div>
+                    <div class="row">
+                        Twitter
+                        <a  target="_blank" rel="noopener noreferrer" v-bind:href="twitterSearchURL">{{ twitterSearchURL }}</a>
+                    </div>
+                    <div class="row">
+                        Facebook
+                        <a  target="_blank" rel="noopener noreferrer" v-bind:href="facebookSearchURL">{{ facebookSearchURL }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/vue@next"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            const HelloVueApp = {
+                data() {
+                    return {
+                    message: "",
+                    twitterSearchURL: "",
+                    instagramUserURL: "",
+                    facebookSearchURL: ""
+                    }
+                },
+                methods: {
+                    getURL: function(){
+                        this.instagramUserURL = "https://www.instagram.com/" + this.message
+                        this.twitterSearchURL = "https://twitter.com/search?f=user&q=" + this.message
+                        this.facebookSearchURL = "https://www.facebook.com/search/pages/?q=" + this.message
+                    },
+                }
+            }
+
+            Vue.createApp(HelloVueApp).mount('#app')
+        </script>
+    </body>
+</html>
